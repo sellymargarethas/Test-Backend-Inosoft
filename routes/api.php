@@ -6,6 +6,7 @@ use Illuminate\Auth\Events\Logout;
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\Auth\LogoutController;
 use App\Http\Controllers\Auth\RegisterController;
+use App\Http\Controllers\KendaraanController;
 
 /*
 |--------------------------------------------------------------------------
@@ -22,5 +23,14 @@ Route::post('register', RegisterController::class);
 Route::post('login', LoginController::class);
 
 Route::middleware(['auth'])->group(function () {
-    Route::post('logout', LogoutController::class); 
+    Route::post('logout', LogoutController::class);
+    Route::resource('kendaraan', KendaraanController::class);
+
+    Route::get('mobil', [KendaraanController::class, 'getAllMobil']);
+    Route::get('mobil/stock', [KendaraanController::class, 'getAllStockMobil']);
+    Route::get('mobil/terjual', [KendaraanController::class, 'getAllTerjualMobil']);
+
+    Route::get('motor', [KendaraanController::class, 'getAllMotor']);
+    Route::get('motor/stock', [KendaraanController::class, 'getAllStockMotor']);
+    Route::get('motor/terjual', [KendaraanController::class, 'getAllTerjualMotor']);
 });
